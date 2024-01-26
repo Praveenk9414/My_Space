@@ -14,7 +14,7 @@ int PrimeCheck(int num , int a){
     return 1;
 }
 int main(){
-    printf("Enter the number to check prime Number.\n");
+    printf("Enter the number to check whether prime Number :\n");
     int num;
     scanf("%d",&num);
     if(PrimeCheck(num,num/2)){
