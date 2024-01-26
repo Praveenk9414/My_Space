@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-// Function to search for a value in a sorted array using binary search
+// Function to search for a value in a sorted array 
 int search(int arr[], int size, int val) {
     // Check if the array is sorted
     for (int i = 1; i < size; i++) {
