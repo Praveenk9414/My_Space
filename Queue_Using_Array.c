@@ -39,8 +39,10 @@ int main() {
     enqueue(q, 40);
     enqueue(q, 50);
     enqueue(q, 60);
+    enqueue(q, 70);
 
     // Dequeue elements from the queue
+    dequeue(q);
     dequeue(q);
     dequeue(q);
 
