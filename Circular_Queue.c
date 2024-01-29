@@ -62,22 +62,22 @@ int main() {
     queue *q = malloc(sizeof(queue));
     q->rear = q->front = 0; // Initialize the circular queue with initial conditions
 
-    enqueue(q, 10);
-    enqueue(q, 20);
-    enqueue(q, 30);
-    enqueue(q, 40);
-    enqueue(q, 50);
+    enqueue(q, 10);  // 1
+    enqueue(q, 20);  // 2
+    enqueue(q, 30);  // 3
+    enqueue(q, 40);  // 4
+    enqueue(q, 50);  // 5  total 5 elements enqueued
 
-    printf("%d removed from queue\n", dequeue(q));
-    printf("%d removed from queue\n", dequeue(q));
-    printf("%d removed from queue\n", dequeue(q));
-    printf("%d removed from queue\n", dequeue(q));
+    printf("%d removed from queue\n", dequeue(q)); // 1
+    printf("%d removed from queue\n", dequeue(q)); // 2
+    printf("%d removed from queue\n", dequeue(q)); // 3
+    printf("%d removed from queue\n", dequeue(q)); // 4 total 4 elements dequeued i.e 4 empty slot and only 1 filled...
 
-    enqueue(q, 60);
-    enqueue(q, 70);
-    enqueue(q, 80);
-    enqueue(q, 90);
-    enqueue(q, 100);
+    enqueue(q, 60); // 1
+    enqueue(q, 70); // 2
+    enqueue(q, 80); // 3
+    enqueue(q, 90); // 4 reached the limit as left over 4 filled and max_size is 5...
+    enqueue(q, 100); 
 
     display(q);
 
