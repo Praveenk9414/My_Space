@@ -67,16 +67,77 @@ void insertion_sort(int arr[], int len){
     }
 }  
 
-void merge_sort(int arr[], int len){
-    int *merge(int first[], int last[]){
-        int len_1 = sizeof(first)/sizeof(int);
-        int len_2 = sizeof(last)/sizeof(int);
-        int min = (if len_1 < len_2) ? len_1 : len_2;
-        for (int i=0; i<min; i++){
-            
+/*
+===============================
+ Rule of Thumb: Midpoint Calculation
+===============================
+
+Always compute mid as:
+    int mid = l + (r - l) / 2;
+
+-> Reason:
+   Prevents integer overflow that may occur in:
+      (l + r) / 2
+
+-> Why it matters:
+  If l and r are large (e.g., 2,000,000,000),
+  then (l + r) can exceed INT_MAX (2,147,483,647)
+  and give wrong results.
+
+-> Safe and standard practice for:
+- Merge Sort
+- Binary Search
+- Any divide-and-conquer algorithm
+
+===============================
+*/
+
+
+void merge(int arr[], int l, int m, int r){
+    int n1 = m-l+1; // size of left half
+    int n2 = r-m;   // size of right half
+    int L[n1], R[n2];
+
+    for (int i=0; i<n1; i++){
+        L[i] = arr[i+l];
+    }
+    for (int i=0; i<n2; i++){
+        R[i] = arr[i+m+1];
+    }
+
+    int k=l;
+    int i=0;
+    int j=0;
+    while(i<n1 && j<n2){
+        if (L[i]<R[j]){
+            arr[k] = L[i];
+            i++;
+            k++;
+        }else{
+            arr[k] = R[j];
+            j++;
+            k++;
         }
     }
-    
+    while(i<n1){
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    while(j<n2){
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(int arr[], int l, int r){
+    if (l < r){
+        int m = l+(r-l)/2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
 }
 
 int main(){
@@ -90,7 +151,8 @@ int main(){
 
     start = clock();
     // bubble_sort(arr, len);
-    insertion_sort(arr, len);
+    // insertion_sort(arr, len);
+    mergeSort(arr, 0, len-1);
     end = clock();
 
     //now now this cpu_time_used might vary depending on the cpu uptilization ... so usually taken the avg of serious of iteration of this
